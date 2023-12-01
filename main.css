@@ -11,6 +11,7 @@
 .cell-row {
   display: flex;
 }
+
 .cell {
   width: 80px;
   border: 1px solid lightgray;

@@ -62,6 +62,7 @@ function initSpreadsheet() {
     for (let j = 0; j < COLS; j++) {
       let cellData = '';
       let isHeader = false;
+      let disabled = false;
 
       if (j === 0) {
         cellData = i;
@@ -73,17 +74,17 @@ function initSpreadsheet() {
       }
 
       if (!cellData) {
-        cell = '';
+        cellData = '';
       }
 
-      //   if (cellData <= 0) {
-      //     cellData = '';
-      //   }
+      if (cellData <= 0) {
+        cellData = '';
+      }
       const rowName = i;
       const columnName = alphabets[j - 1];
       const cell = new Cell(
         isHeader,
-        false,
+        disabled,
         cellData,
         i,
         j,
@@ -119,7 +120,7 @@ function drawSheet() {
     rowContainerEl.className = 'cell-row';
     for (let j = 0; j < spreadsheet[i].length; j++) {
       const cell = spreadsheet[i][j];
-      spreadSheetContainer.append(createCellEl(cell));
+      rowContainerEl.append(createCellEl(cell));
     }
     spreadSheetContainer.append(rowContainerEl);
   }
@@ -142,3 +143,9 @@ function clearHeaderActiveStates() {
     header.classList.remove('active');
   });
 }
+
+const exportBtn = document.querySelector('#export-btn');
+
+exportBtn.onclick = function (e) {
+  console.log(spreadsheet);
+};
