@@ -57,7 +57,7 @@ const alphabets = [
 initSpreadsheet();
 
 function initSpreadsheet() {
-  for (let i = 0; i < ROWS; i++) {
+  for (let i = 0; i < COLS; i++) {
     let spreadsheetRow = [];
     for (let j = 0; j < COLS; j++) {
       let cellData = '';
@@ -67,19 +67,21 @@ function initSpreadsheet() {
       if (j === 0) {
         cellData = i;
         isHeader = true;
+        disabled = true;
       }
       if (i === 0) {
-        cellData = alphabets[j - 1];
         isHeader = true;
+        disabled = true;
+        cellData = alphabets[j - 1];
       }
 
       if (!cellData) {
         cellData = '';
       }
 
-      if (cellData <= 0) {
-        cellData = '';
-      }
+      //   if (cellData <= 0) {
+      //     cellData = '';
+      //   }
       const rowName = i;
       const columnName = alphabets[j - 1];
       const cell = new Cell(
@@ -118,10 +120,13 @@ function drawSheet() {
   for (let i = 0; i < spreadsheet.length; i++) {
     const rowContainerEl = document.createElement('div');
     rowContainerEl.className = 'cell-row';
-    for (let j = 0; j < spreadsheet[i].length; j++) {
-      const cell = spreadsheet[i][j];
-      rowContainerEl.append(createCellEl(cell));
-    }
+    // console.log('rowContain', rowContainerEl);
+
+    // for (let j = 0; j < spreadsheet[i].length; j++) {
+    //   const cell = spreadsheet[i][j];
+    //   rowContainerEl.append(createCellEl(cell));
+    //   console.log('createCellEl', createCellEl(cell));
+    // }
     spreadSheetContainer.append(rowContainerEl);
   }
 }
